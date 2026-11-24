@@ -2,21 +2,21 @@
 
 Herramienta en Python para el análisis pluviométrico de estaciones del IDEAM (Colombia): limpia la serie de precipitación diaria, construye los máximos anuales, ajusta distribuciones de probabilidad y genera curvas de Intensidad–Duración–Frecuencia (IDF) con seis métodos distintos. Exporta los resultados a Excel, PDF y Word.
 
-**Caso de ejemplo incluido:** estación Aeropuerto Yopal (35215020), Casanare, 1974–2026.
+**Casos de ejemplo incluidos:** estaciones Aeropuerto Yopal y La Chaparrera (Casanare), con datos públicos del IDEAM.
 
-![Comparación de curvas IDF](ejemplo_resultados/graficas/comparacion_idf.png)
+![Comparación de curvas IDF, estación Yopal](ejemplo_resultados/yopal/graficas/comparacion_idf.png)
 
-## 📋 Resultado del caso de ejemplo
+## 📋 Dos casos de ejemplo incluidos
 
-| Indicador | Valor |
-|---|---|
-| Estación | Aeropuerto Yopal – 35215020 |
-| Periodo de registro | 1974-12-01 → 2026-05-20 |
-| Años útiles de la serie de máximos anuales | 46 |
-| Pmax 24 h medio multianual | 115.28 mm |
-| Distribución seleccionada | Log-Pearson III (AIC = −69.52; pruebas KS y Anderson-Darling: OK) |
-| Pmax 24 h para Tr = 25 años | 177.08 mm |
-| Región usada para Díaz-Granados / INVIAS | Orinoquía |
+| Indicador | Aeropuerto Yopal (35215020) | La Chaparrera (35210050) |
+|---|---|---|
+| Periodo de registro | 1974-12-01 → 2026-05-20 | 1995-12-01 → 2025-12-01 |
+| Años útiles de la serie de máximos anuales | 46 | 30 |
+| Pmax 24 h medio multianual | 115.28 mm | 98.33 mm |
+| Distribución seleccionada | Log-Pearson III (AIC = −69.52; KS y Anderson-Darling: OK) | Log-Pearson III (AIC = −39.36; KS y Anderson-Darling: OK) |
+| Pmax 24 h para Tr = 25 años | 177.08 mm | 138.30 mm |
+| Unidades | mm, sin conversión | Detectó décimas de mm y aplicó factor 0.1 |
+| Región para Díaz-Granados / INVIAS | Orinoquía | Orinoquía |
 
 ## ⚙️ Qué hace
 
@@ -46,8 +46,8 @@ Herramienta en Python para el análisis pluviométrico de estaciones del IDEAM (
 │   ├── reports.py           #   exportación a Word
 │   └── config.py            #   configuración
 ├── config_ejemplo.yaml      # Configuración de ejemplo
-├── ejemplo_entrada/         # CSV de la estación de ejemplo (datos públicos IDEAM)
-├── ejemplo_resultados/      # Excel y gráficas generadas con el ejemplo
+├── ejemplo_entrada/         # CSV de las dos estaciones de ejemplo (datos públicos IDEAM)
+├── ejemplo_resultados/      # Por estación: Excel, gráficas (PDF y PNG) y memoria de cálculo en Word
 └── requirements.txt
 ```
 
@@ -59,7 +59,7 @@ python main.py --carpeta-entrada ./ejemplo_entrada --carpeta-salida ./salida \
     --principal "Yopal Pluviometria - 35215020.csv" --region Orinoquia
 ```
 
-El ejemplo tarda unos 3 minutos. También se puede usar un archivo de configuración: copia `config_ejemplo.yaml` a `config.yaml`, edítalo y ejecuta `python main.py --config config.yaml`. Argumentos principales: `--tr-diseno` (periodo de retorno), `--factor` (unidades), `--no-tests`, `--no-ic` (más rápido) y `--no-word`.
+Cada ejemplo tarda entre 3 y 7 minutos. La memoria de cálculo de los ejemplos se genera con el campo de firma en blanco (`XXX`). También se puede usar un archivo de configuración: copia `config_ejemplo.yaml` a `config.yaml`, edítalo y ejecuta `python main.py --config config.yaml`. Argumentos principales: `--tr-diseno` (periodo de retorno), `--factor` (unidades), `--no-tests`, `--no-ic` (más rápido) y `--no-word`.
 
 Formato esperado del CSV (descarga de IDEAM, separador `;`):
 
