@@ -1,0 +1,18 @@
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.env
+.vscode/
+.idea/
+.DS_Store
+
+# resultados generados por la herramienta
+salida/
+entrada/
+
+# configuración personal
+config.yaml
+config.json
+config_efectiva.json
